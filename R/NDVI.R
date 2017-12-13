@@ -90,7 +90,6 @@ process_gimms_ndvi=function(gimms_folder = './GIMMS'){
     summarize(ndvi=mean(ndvi, na.rm=TRUE)) %>%
     ungroup()
 
-  save_provenance(gimms_ndvi)
   return(gimms_ndvi)
 }
 
