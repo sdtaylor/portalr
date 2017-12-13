@@ -108,13 +108,13 @@ get_gimms_ndvi = function(gimms_folder = './GIMMS'){
   } else {
     print('Gimms NDVI data not found, processing from scratch')
 
-    files_to_download=get_gimms_download_list()
+    files_to_download=get_gimms_download_list(gimms_folder = gimms_folder)
     if(length(files_to_download)>0){
       print('Downloading GIMMS data')
       downloadGimms(x=files_to_download, dsn=gimms_folder)
     }
 
-    gimms_ndvi_data=process_gimms_ndvi()
+    gimms_ndvi_data=process_gimms_ndvi(gimms_folder = gimms_folder)
 
     db_engine(action='write', df=gimms_ndvi_data, new_table_name = 'gimms_ndvi')
 
@@ -178,4 +178,4 @@ library(rgdal)
 library(dbplyr)
 library(RSQLite)
 
-test = get_gimms_ndvi()
+test = get_gimms_ndvi(gimms_folder = '/home/shawn/data/gimms/')
